@@ -107,6 +107,17 @@
             color: #721c24;
         }
         
+        .status-bar {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #495057;
+            text-align: center;
+        }
+        
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -434,20 +445,13 @@
             <p>Discover the latest startup programs, government schemes, and funding opportunities</p>
         </div>
 
-        <div class="controls">
-            <button class="btn btn-primary" onclick="loadEvents()">
-                📊 Load Latest Events
-            </button>
-            <button class="btn btn-secondary" onclick="runScraping()">
-                🔄 Run Scraping
-            </button>
-            <select class="filter-select" id="eventTypeFilter" onchange="filterEvents()">
-                <option value="">All Event Types</option>
-                <option value="startup_program">Startup Programs</option>
-                <option value="government_scheme">Government Schemes</option>
-                <option value="incubator">Incubator Programs</option>
-                <option value="funding">Funding Opportunities</option>
-            </select>
+                <div class="controls">
+            <button id="load-events-btn" onclick="loadEvents()">Load Events</button>
+            <button id="run-scraping-btn" onclick="runScraping()">Run Scraping</button>
+        </div>
+        
+        <div id="auto-scraper-status" class="status-bar">
+            Loading status...
         </div>
 
         <div class="stats" id="statsContainer" style="display: none;">
@@ -500,24 +504,58 @@
         }
 
         async function runScraping() {
-            showStatus('Running scraping process... This may take a moment.', 'loading');
+            setLoadingState('run-scraping-btn', true, 'Scraping...');
             
             try {
-                const response = await fetch(`${API_BASE}/scrape`, {
+                const response = await fetch('http://localhost:8000/scrape', {
                     method: 'POST'
                 });
-                const data = await response.json();
                 
-                showStatus('Scraping started! Events will be updated in the background.', 'success');
-                
-                // Auto-reload events after a delay
-                setTimeout(() => {
-                    loadEvents();
-                }, 5000);
-                
+                if (response.ok) {
+                    const result = await response.json();
+                    showNotification('Manual scraping completed! Loading new events...', 'success');
+                    
+                    // Wait a moment for scraping to complete then reload events
+                    setTimeout(() => {
+                        loadEvents();
+                        loadStatus(); // Also update status
+                    }, 2000);
+                } else {
+                    throw new Error('Scraping failed');
+                }
             } catch (error) {
                 console.error('Error running scraping:', error);
-                showStatus('Error starting scraping process.', 'error');
+                showNotification('Error running scraping. Please try again.', 'error');
+            } finally {
+                setLoadingState('run-scraping-btn', false, 'Run Scraping');
+            }
+        }
+
+        async function loadStatus() {
+            try {
+                const response = await fetch('http://localhost:8000/status');
+                if (response.ok) {
+                    const status = await response.json();
+                    updateStatusDisplay(status);
+                }
+            } catch (error) {
+                console.error('Error loading status:', error);
+            }
+        }
+
+        function updateStatusDisplay(status) {
+            const statusElement = document.getElementById('auto-scraper-status');
+            if (statusElement) {
+                const autoScraper = status.auto_scraper;
+                const lastRun = autoScraper.last_run ? 
+                    new Date(autoScraper.last_run).toLocaleString() : 'Never';
+                
+                statusElement.innerHTML = `
+                    <strong>Auto-Scraper:</strong> ${autoScraper.running ? '🟢 Active' : '🔴 Inactive'} 
+                    (Every ${autoScraper.interval_minutes} min) | 
+                    <strong>Last Run:</strong> ${lastRun} | 
+                    <strong>Total Events:</strong> ${status.database.total_events}
+                `;
             }
         }
 
@@ -575,10 +613,35 @@
             document.getElementById('statsContainer').style.display = 'flex';
         }
 
-        // Load events on page load
+        // Auto-refresh functionality
+        let autoRefreshTimer;
+        
+        function startAutoRefresh() {
+            // Refresh every 5 minutes (300,000 ms)
+            autoRefreshTimer = setInterval(() => {
+                console.log('Auto-refreshing events...');
+                loadEvents();
+            }, 300000);
+        }
+        
+        function stopAutoRefresh() {
+            if (autoRefreshTimer) {
+                clearInterval(autoRefreshTimer);
+            }
+        }
+        
+        // Load events on page load and start auto-refresh
         document.addEventListener('DOMContentLoaded', function() {
             loadEvents();
+            loadStatus();
+            startAutoRefresh();
+            
+            // Also refresh status every minute
+            setInterval(loadStatus, 60000);
         });
+        
+        // Stop auto-refresh when page unloads
+        window.addEventListener('beforeunload', stopAutoRefresh);
     </script>
 </body>
 </html>

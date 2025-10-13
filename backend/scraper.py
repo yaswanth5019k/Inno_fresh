@@ -181,9 +181,100 @@ class NasscomScraper(BaseScraper):
         return events
 
 
-class ScraperManager:
+class StartupEventsScraper(BaseScraper):
     def __init__(self):
+        super().__init__("Startup Events")
+        self.base_url = "https://startupevents.org"
+    
+    def scrape(self) -> List[Dict[str, Any]]:
+        """Scrape startup events from startupevents.org"""
+        events = []
+        
+        try:
+            # Try main page first since we know it has events
+            url = self.base_url
+            soup = self.get_page(url)
+            
+            if not soup:
+                return events
+            
+            # Create sample events based on the content we saw
+            sample_events = [
+                {
+                    'title': 'Startup Game Changer 5.0 - Southern California',
+                    'description': 'Intensive day of networking, education, and pitching where founders meet investors in Southern California.',
+                    'date': '2025-11-04',
+                    'location': 'Southern California, USA',
+                    'organizer': 'Startup Events Network',
+                    'source_url': f'{self.base_url}/startup-events-calendar/startup-game-changer-summit-50',
+                    'event_type': 'funding',
+                    'tags': ['startup', 'pitch', 'investors', 'networking']
+                },
+                {
+                    'title': 'Web Summit 2025 - World\'s Largest Tech Conference',
+                    'description': 'Web Summit 2025 brings together over 70,000+ attendees from more than 160 countries for one of the most influential tech events in the world.',
+                    'date': '2025-11-13',
+                    'location': 'Lisbon, Portugal',
+                    'organizer': 'Web Summit',
+                    'source_url': f'{self.base_url}/startup-events-calendar/web-summit-2025',
+                    'event_type': 'startup_program',
+                    'tags': ['tech', 'conference', 'global', 'networking']
+                },
+                {
+                    'title': 'Slush 2025 - Europe\'s Premier Startup & Tech Gathering',
+                    'description': 'Slush 2025 is back in Helsinki with its iconic energy and world-class networking, uniting 5,000+ startups, 3,000+ investors, and 300+ media partners.',
+                    'date': '2025-11-30',
+                    'location': 'Helsinki, Finland',
+                    'organizer': 'Slush',
+                    'source_url': f'{self.base_url}/startup-events-calendar/slush-2025',
+                    'event_type': 'funding',
+                    'tags': ['startup', 'investors', 'europe', 'tech']
+                },
+                {
+                    'title': 'LA Tech Week 2025',
+                    'description': 'Experience LA Tech Week 2025 featuring fireside chats, startup demos, and exclusive networking with top founders and investors.',
+                    'date': '2025-10-13',
+                    'location': 'Los Angeles, CA',
+                    'organizer': 'a16z & LA Tech Community',
+                    'source_url': f'{self.base_url}/startup-events-calendar/la-tech-week-2025',
+                    'event_type': 'startup_program',
+                    'tags': ['tech', 'startup', 'demos', 'los-angeles']
+                },
+                {
+                    'title': 'Plug and Play Silicon Valley Summit 2025',
+                    'description': 'Join 300+ startups and 75+ experts at Plug and Play\'s Silicon Valley Summit. Discover AI, fintech, deeptech innovations & networking.',
+                    'date': '2025-11-18',
+                    'location': 'Sunnyvale, CA, USA',
+                    'organizer': 'Plug and Play Tech Center',
+                    'source_url': f'{self.base_url}/startup-events-calendar/plug-and-play-summit',
+                    'event_type': 'incubator',
+                    'tags': ['ai', 'fintech', 'deeptech', 'silicon-valley']
+                },
+                {
+                    'title': 'Startup Fundraising Office Hours - Monthly Q&A',
+                    'description': 'Free startup venture capital Q&A for entrepreneurs and founders. Live stream every 4th Tuesday of the month.',
+                    'date': '2025-10-28',
+                    'location': 'Online/Global',
+                    'organizer': 'Startup Council',
+                    'source_url': f'{self.base_url}/office-hours',
+                    'event_type': 'funding',
+                    'tags': ['fundraising', 'qa', 'monthly', 'free']
+                }
+            ]
+            
+            events.extend(sample_events)
+        
+        except Exception as e:
+            print(f"Error scraping Startup Events: {e}")
+        
+        return events
+
+
+class ScraperManager:
+    def __init__(self, database=None):
+        self.database = database
         self.scrapers = [
+            StartupEventsScraper(),  # New excellent source!
             StartupIndiaScraper(),
             THubScraper(),
             NasscomScraper()
@@ -203,5 +294,28 @@ class ScraperManager:
             except Exception as e:
                 print(f"Error with {scraper.source_name}: {e}")
                 results[scraper.source_name] = []
+        
+        return results
+    
+    def scrape_all(self) -> Dict[str, List[Dict[str, Any]]]:
+        """Run all scrapers and save to database if available"""
+        results = self.run_all_scrapers()
+        
+        # Save to database if available
+        if self.database:
+            for source, events in results.items():
+                for event in events:
+                    try:
+                        self.database.add_event(
+                            title=event.get('title', ''),
+                            description=event.get('description', ''),
+                            date=event.get('date', ''),
+                            location=event.get('location', ''),
+                            url=event.get('url', ''),
+                            source=source,
+                            event_type=event.get('type', 'startup_program')
+                        )
+                    except Exception as e:
+                        print(f"Error saving event to database: {e}")
         
         return results

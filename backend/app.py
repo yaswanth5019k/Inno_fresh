@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 import json
 from datetime import datetime
+import threading
+import time
 
 # Import our custom modules
 import sys
@@ -27,9 +29,55 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize database and scraper
+# Initialize managers
 db = DatabaseManager()
-scraper_manager = ScraperManager()
+scraper_manager = ScraperManager(db)
+
+# Auto-scraper configuration
+AUTO_SCRAPE_INTERVAL = 1800  # 30 minutes in seconds
+auto_scraper_running = False
+last_auto_scrape = None
+
+def background_auto_scraper():
+    """Background thread that runs scraping automatically"""
+    global auto_scraper_running, last_auto_scrape
+    while auto_scraper_running:
+        try:
+            current_time = datetime.now()
+            print(f"[{current_time}] Running automatic scraping...")
+            results = scraper_manager.scrape_all()
+            total_new = sum(len(events) for events in results.values())
+            last_auto_scrape = current_time
+            print(f"[{current_time}] Auto-scraper found {total_new} new events")
+        except Exception as e:
+            print(f"[{datetime.now()}] Auto-scraper error: {e}")
+        
+        time.sleep(AUTO_SCRAPE_INTERVAL)
+
+def start_auto_scraper():
+    """Start the background auto-scraper"""
+    global auto_scraper_running
+    if not auto_scraper_running:
+        auto_scraper_running = True
+        thread = threading.Thread(target=background_auto_scraper, daemon=True)
+        thread.start()
+        print(f"[{datetime.now()}] Auto-scraper started (runs every {AUTO_SCRAPE_INTERVAL/60} minutes)")
+
+def stop_auto_scraper():
+    """Stop the background auto-scraper"""
+    global auto_scraper_running
+    auto_scraper_running = False
+    print(f"[{datetime.now()}] Auto-scraper stopped")
+
+@app.on_event("startup")
+async def startup_event():
+    """Start background processes when app starts"""
+    start_auto_scraper()
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up when app shuts down"""
+    stop_auto_scraper()
 
 @app.get("/")
 async def root():
@@ -37,6 +85,24 @@ async def root():
     return {
         "message": "AI Bot for Startup & Government Updates API",
         "status": "running",
+        "auto_scraper": "running" if auto_scraper_running else "stopped",
+        "auto_scrape_interval_minutes": AUTO_SCRAPE_INTERVAL / 60,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@app.get("/status")
+async def get_status():
+    """Get detailed status including auto-scraper information"""
+    return {
+        "api_status": "running",
+        "auto_scraper": {
+            "running": auto_scraper_running,
+            "interval_minutes": AUTO_SCRAPE_INTERVAL / 60,
+            "last_run": last_auto_scrape.isoformat() if last_auto_scrape else None
+        },
+        "database": {
+            "total_events": len(db.get_events())
+        },
         "timestamp": datetime.now().isoformat()
     }
 
