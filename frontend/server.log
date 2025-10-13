@@ -1,0 +1,31 @@
+::1 - - [13/Oct/2025 22:28:05] "HEAD / HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:28:11] "GET /?id=e49b4685-4c91-402f-a85e-6f734b0001e6&vscodeBrowserReqId=1760374691900 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:28:20] "GET / HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:28:20] code 404, message File not found
+::1 - - [13/Oct/2025 22:28:20] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [13/Oct/2025 22:28:21] "GET / HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:28:21] code 404, message File not found
+::1 - - [13/Oct/2025 22:28:21] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [13/Oct/2025 22:28:26] code 404, message File not found
+::1 - - [13/Oct/2025 22:28:26] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 -
+::1 - - [13/Oct/2025 22:28:26] code 404, message File not found
+::1 - - [13/Oct/2025 22:28:26] code 404, message File not found
+::1 - - [13/Oct/2025 22:28:26] "GET /apple-touch-icon.png HTTP/1.1" 404 -
+::1 - - [13/Oct/2025 22:28:26] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [13/Oct/2025 22:30:33] "GET /?id=636d050f-f05a-4943-876d-d65988554ef2&vscodeBrowserReqId=1760374833449 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:30:37] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:46:25] "GET /widget.html?id=636d050f-f05a-4943-876d-d65988554ef2&vscodeBrowserReqId=1760375785302 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:47:03] "GET / HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:47:04] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:47:05] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:47:05] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:47:11] "GET /demo.html?id=636d050f-f05a-4943-876d-d65988554ef2&vscodeBrowserReqId=1760375831094 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:47:11] "GET /startup-widget.js HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:47:49] "GET /demo.html HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:47:49] "GET /startup-widget.js HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:48:01] "GET /widget.html HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:48:12] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:50:39] "GET / HTTP/1.1" 304 -
+::1 - - [13/Oct/2025 22:51:22] "GET /sidebar-widget.html?id=636d050f-f05a-4943-876d-d65988554ef2&vscodeBrowserReqId=1760376082003 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:52:10] "GET /website-with-sidebar.html?id=636d050f-f05a-4943-876d-d65988554ef2&vscodeBrowserReqId=1760376130763 HTTP/1.1" 200 -
+::1 - - [13/Oct/2025 22:52:10] "GET /sidebar-startup-widget.js HTTP/1.1" 200 -
