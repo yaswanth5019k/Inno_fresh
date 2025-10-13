@@ -74,6 +74,22 @@ class DatabaseManager:
         conn.close()
         return event_id
     
+    def add_event(self, title: str, description: str = None, date: str = None, 
+                  location: str = None, url: str = None, source: str = None, 
+                  event_type: str = "startup_program") -> int:
+        """Add event with individual parameters (for scraper compatibility)"""
+        event_data = {
+            'title': title,
+            'description': description,
+            'date': date,
+            'location': location,
+            'organizer': source or 'Unknown',
+            'source_url': url or '',
+            'event_type': event_type,
+            'tags': []
+        }
+        return self.insert_event(event_data)
+    
     def get_events(self, limit: int = 50, event_type: str = None) -> List[Dict[str, Any]]:
         """Retrieve events from the database"""
         conn = sqlite3.connect(self.db_path)
