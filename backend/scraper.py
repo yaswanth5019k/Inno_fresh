@@ -337,8 +337,8 @@ class StartupEventsScraper(BaseScraper):
                     'description': 'Intensive day of networking, education, and pitching where founders meet investors in Southern California.',
                     'date': '2025-11-04',
                     'location': 'Southern California, USA',
-                    'organizer': 'Startup Events Network',
-                    'source_url': f'{self.base_url}/startup-events-calendar/startup-game-changer-summit-50',
+                    'organizer': 'Startup Game Changer',
+                    'source_url': 'https://startupgamechanger.com',
                     'event_type': 'funding',
                     'tags': ['startup', 'pitch', 'investors', 'networking'],
                     'image_url': 'https://startupevents.org/wp-content/uploads/2024/09/startup-game-changer.jpg'
@@ -349,7 +349,7 @@ class StartupEventsScraper(BaseScraper):
                     'date': '2025-11-13',
                     'location': 'Lisbon, Portugal',
                     'organizer': 'Web Summit',
-                    'source_url': f'{self.base_url}/startup-events-calendar/web-summit-2025',
+                    'source_url': 'https://websummit.com',
                     'event_type': 'startup_program',
                     'tags': ['tech', 'conference', 'global', 'networking'],
                     'image_url': 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop'
@@ -360,7 +360,7 @@ class StartupEventsScraper(BaseScraper):
                     'date': '2025-11-30',
                     'location': 'Helsinki, Finland',
                     'organizer': 'Slush',
-                    'source_url': f'{self.base_url}/startup-events-calendar/slush-2025',
+                    'source_url': 'https://slush.org',
                     'event_type': 'funding',
                     'tags': ['startup', 'investors', 'europe', 'tech'],
                     'image_url': 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'
@@ -449,9 +449,9 @@ class ScraperManager:
                             description=event.get('description', ''),
                             date=event.get('date', ''),
                             location=event.get('location', ''),
-                            url=event.get('url', ''),
+                            url=event.get('source_url', event.get('url', '')),
                             source=source,
-                            event_type=event.get('type', 'startup_program'),
+                            event_type=event.get('event_type', event.get('type', 'startup_program')),
                             image_url=event.get('image_url')
                         )
                     except Exception as e:

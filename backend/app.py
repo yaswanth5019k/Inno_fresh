@@ -114,9 +114,22 @@ async def get_events(
     """Get events from the database"""
     try:
         events = db.get_events(limit=limit, event_type=event_type)
+        
+        # Map database fields to frontend-expected fields
+        formatted_events = []
+        for event in events:
+            formatted_event = dict(event)
+            # Map source_url to url for frontend compatibility
+            formatted_event['url'] = event.get('source_url', '')
+            # Map organizer to source for frontend compatibility
+            formatted_event['source'] = event.get('organizer', 'Unknown')
+            # Ensure type field exists
+            formatted_event['type'] = event.get('event_type', 'startup_program')
+            formatted_events.append(formatted_event)
+        
         return {
-            "events": events,
-            "count": len(events),
+            "events": formatted_events,
+            "count": len(formatted_events),
             "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
