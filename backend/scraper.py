@@ -341,7 +341,7 @@ class StartupEventsScraper(BaseScraper):
                     'source_url': 'https://startupgamechanger.com',
                     'event_type': 'funding',
                     'tags': ['startup', 'pitch', 'investors', 'networking'],
-                    'image_url': 'https://startupevents.org/wp-content/uploads/2024/09/startup-game-changer.jpg'
+                    'image_url': 'https://startupgamechanger.com/wp-content/uploads/2024/10/36.jpeg'
                 },
                 {
                     'title': 'Web Summit 2025 - World\'s Largest Tech Conference',
@@ -352,7 +352,7 @@ class StartupEventsScraper(BaseScraper):
                     'source_url': 'https://websummit.com',
                     'event_type': 'startup_program',
                     'tags': ['tech', 'conference', 'global', 'networking'],
-                    'image_url': 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop'
+                    'image_url': 'https://websummit.com/wp-media/2024/11/3qYxskCg-WSL-logo-large-300x150.png'
                 },
                 {
                     'title': 'Slush 2025 - Europe\'s Premier Startup & Tech Gathering',
@@ -363,7 +363,7 @@ class StartupEventsScraper(BaseScraper):
                     'source_url': 'https://slush.org',
                     'event_type': 'funding',
                     'tags': ['startup', 'investors', 'europe', 'tech'],
-                    'image_url': 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'
+                    'image_url': 'https://slush.org/photos.slush.org/media/venue-hero.jpg'
                 },
                 {
                     'title': 'LA Tech Week 2025',
@@ -371,10 +371,10 @@ class StartupEventsScraper(BaseScraper):
                     'date': '2025-10-13',
                     'location': 'Los Angeles, CA',
                     'organizer': 'a16z & LA Tech Community',
-                    'source_url': f'{self.base_url}/startup-events-calendar/la-tech-week-2025',
+                    'source_url': 'https://a16z.com/event/la-tech-week/',
                     'event_type': 'startup_program',
                     'tags': ['tech', 'startup', 'demos', 'los-angeles'],
-                    'image_url': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&q=80'
+                    'image_url': 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=400&h=300&fit=crop&q=80'
                 },
                 {
                     'title': 'Plug and Play Silicon Valley Summit 2025',
@@ -382,10 +382,10 @@ class StartupEventsScraper(BaseScraper):
                     'date': '2025-11-18',
                     'location': 'Sunnyvale, CA, USA',
                     'organizer': 'Plug and Play Tech Center',
-                    'source_url': f'{self.base_url}/startup-events-calendar/plug-and-play-summit',
+                    'source_url': 'https://www.plugandplaytechcenter.com',
                     'event_type': 'incubator',
                     'tags': ['ai', 'fintech', 'deeptech', 'silicon-valley'],
-                    'image_url': 'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=400&h=300&fit=crop&q=80'
+                    'image_url': 'https://www.plugandplaytechcenter.com/sites/default/files/styles/large/public/2024-06/PnP%20Logo%20on%20Black%20bg_1.jpg'
                 },
                 {
                     'title': 'Startup Fundraising Office Hours - Monthly Q&A',
@@ -393,7 +393,7 @@ class StartupEventsScraper(BaseScraper):
                     'date': '2025-10-28',
                     'location': 'Online/Global',
                     'organizer': 'Startup Council',
-                    'source_url': f'{self.base_url}/office-hours',
+                    'source_url': 'https://startupcouncil.org/office-hours',
                     'event_type': 'funding',
                     'tags': ['fundraising', 'qa', 'monthly', 'free'],
                     'image_url': 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop&q=80'
@@ -411,12 +411,31 @@ class StartupEventsScraper(BaseScraper):
 class ScraperManager:
     def __init__(self, database=None):
         self.database = database
-        self.scrapers = [
-            StartupEventsScraper(),  # New excellent source!
-            StartupIndiaScraper(),
-            THubScraper(),
-            NasscomScraper()
-        ]
+        
+        # Import the new scrapers
+        try:
+            from new_scrapers import StartupNewsAggregator, Inc42Scraper, EventbriteScraper
+            
+            self.scrapers = [
+                StartupEventsScraper(),    # Existing excellent source
+                StartupIndiaScraper(),     # Government schemes  
+                THubScraper(),             # Hyderabad incubator
+                NasscomScraper(),          # Industry events
+                StartupNewsAggregator(),   # NEW: Curated startup events (replaces 10times)
+                Inc42Scraper(),            # NEW: Inc42 startup news & events  
+                EventbriteScraper()        # NEW: Eventbrite startup events
+            ]
+            print(f"✅ Loaded {len(self.scrapers)} scrapers including 3 new sources!")
+            
+        except ImportError as e:
+            print(f"⚠️  Could not import new scrapers: {e}")
+            # Fallback to existing scrapers
+            self.scrapers = [
+                StartupEventsScraper(),
+                StartupIndiaScraper(),
+                THubScraper(), 
+                NasscomScraper()
+            ]
     
     def run_all_scrapers(self) -> Dict[str, List[Dict[str, Any]]]:
         """Run all scrapers and collect results"""

@@ -3,94 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 InnoBot - AI Startup Intelligence Hub</title>
+    <title>AI Event Bot - Startup Events Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
-            .source-default {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white !important;
-            border: 2px solid #5e72e4;
-        }
-
-        /* Source Legend Styles */
-        .source-legend-section {
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-
-        .source-legend-section h3 {
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .source-legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .legend-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: flex-start;
-        }
-
-        .legend-badge {
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border: 2px solid;
-        }
-
-        .legend-description {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        .legend-link {
-            color: #4fc3f7;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .legend-link:hover {
-            color: #29b6f6;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .source-legend {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                padding: 20px;
-            }
-        }
-
-        .event-actions { padding: 0;
+            padding: 0;
             box-sizing: border-box;
         }
         
@@ -110,74 +30,29 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Animated Background Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: float 8s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Main Container */
-        .main-container {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-        }
-
-        /* Header Section */
-        .header-section {
+        .header {
             text-align: center;
-            padding: 60px 20px 40px;
+            margin-bottom: 60px;
             position: relative;
         }
 
-        .logo-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 20px 40px;
-            border-radius: 50px;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        .logo-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
@@ -219,7 +94,6 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Controls Section */
         .controls-section {
             display: flex;
             justify-content: center;
@@ -270,7 +144,6 @@
             50% { opacity: 0.7; }
         }
 
-        /* Status Bar */
         .status-section {
             max-width: 900px;
             margin: 0 auto 40px;
@@ -280,80 +153,69 @@
         .status-bar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
             padding: 20px 30px;
-            text-align: center;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            color: #333;
             font-weight: 500;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: slideIn 1s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 16px;
         }
 
         .status-indicator {
-            display: inline-block;
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 8px;
-            animation: statusPulse 2s ease-in-out infinite;
+            display: inline-block;
         }
 
         .status-active {
-            background: linear-gradient(45deg, #4CAF50, #81C784);
+            background: linear-gradient(45deg, #4caf50, #8bc34a);
+            animation: statusPulse 2s ease-in-out infinite;
         }
 
         .status-inactive {
-            background: linear-gradient(45deg, #f44336, #e57373);
+            background: #f44336;
         }
 
         @keyframes statusPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        /* Events Grid */
         .events-section {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px 60px;
+            padding: 0 20px;
         }
 
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .event-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
-            padding: 30px;
-            position: relative;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            animation: cardFadeIn 0.8s ease-out;
+            animation: cardSlideIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        @keyframes cardFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
+        @keyframes cardSlideIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -361,123 +223,102 @@
         }
 
         .event-card:hover {
-            transform: translateY(-10px) rotate(1deg);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 1);
-        }
-
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4d79ff);
-            border-radius: 25px 25px 0 0;
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
 
         .event-image {
             width: 100%;
             height: 220px;
-            overflow: hidden;
-            border-radius: 20px 20px 0 0;
-            margin: -30px -30px 20px -30px;
             position: relative;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            overflow: hidden;
+            border-radius: 25px 25px 0 0;
         }
 
         .event-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 20px 20px 0 0;
+            transition: transform 0.4s ease;
+        }
+
+        .event-image img.loading {
+            opacity: 0.7;
+        }
+
+        .event-image img.loaded {
+            opacity: 1;
         }
 
         .event-card:hover .event-image img {
-            transform: scale(1.03);
-            filter: brightness(1.05);
+            transform: scale(1.05);
         }
-        
+
         .image-placeholder {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 48px;
             color: white;
-            font-size: 18px;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .image-placeholder::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: rotate(45deg) translateX(-100%); }
-            100% { transform: rotate(45deg) translateX(100%); }
-        }
-        
-        .event-image img.loading {
-            opacity: 0;
-        }
-        
-        .event-image img.loaded {
-            opacity: 1;
+
+        .event-content {
+            padding: 25px;
         }
 
         .event-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            gap: 15px;
         }
 
         .event-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: #2c3e50;
             line-height: 1.3;
-            margin-bottom: 10px;
+            margin: 0;
             flex: 1;
         }
 
         .event-type {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-left: 15px;
-            min-width: fit-content;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .type-startup_program {
-            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
-            color: #00796b;
-            border: 1px solid #4db6ac;
+        .event-type i {
+            font-size: 10px;
+        }
+
+        .type-funding {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            color: #856404;
+            border: 1px solid #ffeaa7;
         }
 
         .type-government_scheme {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            color: #856404;
-            border: 1px solid #ffc107;
+            background: linear-gradient(135deg, #d1ecf1, #a8dadc);
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .type-startup_program {
+            background: linear-gradient(135deg, #f8d7da, #fdccd1);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         .type-incubator {
@@ -542,7 +383,6 @@
             gap: 6px;
         }
 
-        /* Source-specific styling */
         .source-startup-events {
             background: linear-gradient(135deg, #ff6b6b, #ee5a52);
             color: white !important;
@@ -573,80 +413,83 @@
             border: 2px solid #5e72e4;
         }
 
-        .event-link {
+        .learn-more-btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 14px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 14px;
         }
 
-        .event-link:hover {
+        .learn-more-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
 
-        /* Loading States */
-        .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
+        .learn-more-btn i {
+            font-size: 12px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.8);
             grid-column: 1 / -1;
         }
 
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Notification System */
-        .notification {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            padding: 20px 30px;
-            border-radius: 15px;
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
             color: white;
-            font-weight: 600;
-            z-index: 1000;
-            transform: translateX(400px);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .notification.show {
-            transform: translateX(0);
+        .empty-state p {
+            font-size: 16px;
+            opacity: 0.7;
         }
 
-        .notification.success {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(129, 199, 132, 0.9));
+        @media (max-width: 1200px) {
+            .events-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 25px;
+            }
         }
 
-        .notification.error {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.9), rgba(229, 115, 115, 0.9));
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-section {
-                padding: 40px 20px 30px;
+            .container {
+                padding: 15px;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .controls-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .control-btn {
+                width: 100%;
+                max-width: 300px;
             }
 
             .main-title {
@@ -657,42 +500,34 @@
                 font-size: 1.1rem;
             }
 
-            .controls-section {
-                gap: 15px;
-            }
-
-            .control-btn {
-                min-width: 150px;
-                padding: 12px 25px;
-                font-size: 14px;
-            }
-
-            .events-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .event-card {
-                padding: 25px;
-            }
-
-            .event-title {
-                font-size: 18px;
-            }
-
             .event-actions {
                 flex-direction: column;
                 gap: 15px;
+                align-items: stretch;
+            }
+
+            .event-source {
+                text-align: center;
+                justify-content: center;
             }
         }
 
         @media (max-width: 480px) {
-            .logo-container {
-                padding: 15px 25px;
+            .container {
+                padding: 10px;
             }
 
-            .logo-icon {
-                font-size: 36px;
+            .event-content {
+                padding: 20px;
+            }
+
+            .event-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .event-type {
+                align-self: flex-start;
             }
 
             .main-title {
@@ -700,389 +535,334 @@
             }
 
             .control-btn {
-                min-width: 120px;
-                padding: 10px 20px;
-            }
-
-            .event-card {
-                padding: 20px;
-            }
-
-            .status-bar {
-                padding: 15px 20px;
+                padding: 12px 20px;
                 font-size: 14px;
             }
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5));
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.7));
-        }
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.4s; }
+        .event-card:nth-child(5) { animation-delay: 0.5s; }
+        .event-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
+
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="main-container">
-        <!-- Header Section -->
-        <div class="header-section">
-            <div class="logo-container">
-                <div class="logo-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div>
-                    <div class="main-title">InnoBot AI</div>
-                    <div class="subtitle">Real-time Startup & Government Intelligence Hub</div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo-icon">🤖</div>
+            <h1 class="main-title">AI Event Bot</h1>
+            <p class="subtitle">Discover the latest startup events, funding opportunities, and innovation programs</p>
         </div>
 
-        <!-- Controls Section -->
         <div class="controls-section">
-            <button id="load-events-btn" class="control-btn" onclick="loadEvents()">
+            <button class="control-btn" onclick="startScraping()">
+                <i class="fas fa-play"></i>
+                Start Auto-Scraper
+            </button>
+            <button class="control-btn" onclick="stopScraping()">
+                <i class="fas fa-stop"></i>
+                Stop Auto-Scraper
+            </button>
+            <button class="control-btn" onclick="refreshEvents()">
                 <i class="fas fa-sync-alt"></i>
                 Refresh Events
             </button>
-            <button id="run-scraping-btn" class="control-btn" onclick="runScraping()">
-                <i class="fas fa-spider"></i>
-                Scan Latest Data
-            </button>
         </div>
 
-        <!-- Status Section -->
         <div class="status-section">
-            <div id="auto-scraper-status" class="status-bar">
-                <span class="status-indicator status-active"></span>
-                Initializing AI Intelligence System...
+            <div class="status-bar" id="status">
+                <span class="status-indicator status-inactive" id="statusIndicator"></span>
+                <span id="statusText">Auto-scraper is stopped</span>
             </div>
         </div>
 
-        <!-- Source Legend -->
-        <div class="source-legend-section">
-            <h3>📊 Data Sources</h3>
-            <div class="source-legend">
-                <div class="legend-item">
-                    <span class="legend-badge source-startup-events">
-                        <i class="fas fa-rocket"></i>
-                        Startup Events
-                    </span>
-                    <span class="legend-description">Global startup events & conferences</span>
-                    <a href="https://startupevents.org" target="_blank" class="legend-link">startupevents.org</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-nasscom">
-                        <i class="fas fa-industry"></i>
-                        NASSCOM India
-                    </span>
-                    <span class="legend-description">India's IT industry association events</span>
-                    <a href="https://nasscom.in" target="_blank" class="legend-link">nasscom.in</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-t-hub">
-                        <i class="fas fa-building"></i>
-                        T-Hub Hyderabad
-                    </span>
-                    <span class="legend-description">India's premier startup incubator</span>
-                    <a href="https://t-hub.co" target="_blank" class="legend-link">t-hub.co</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-startup-india">
-                        <i class="fas fa-flag"></i>
-                        Startup India Gov
-                    </span>
-                    <span class="legend-description">Government startup schemes</span>
-                    <a href="https://www.startupindia.gov.in" target="_blank" class="legend-link">startupindia.gov.in</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Events Section -->
         <div class="events-section">
-            <div id="events-container" class="events-grid">
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-                </div>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be loaded here -->
             </div>
         </div>
     </div>
 
-    <!-- Notification Container -->
-    <div id="notification" class="notification"></div>
-
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // API Base URL
         const API_BASE = 'http://localhost:8000';
-
-        // Initialize particles on load
-        createParticles();
-
-        // Notification system
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
+        let lastDataUpdate = null;
+        
+        function updateStatus(isActive, message) {
+            const indicator = document.getElementById('statusIndicator');
+            const text = document.getElementById('statusText');
             
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        // Loading state management
-        function setLoadingState(buttonId, isLoading, text) {
-            const button = document.getElementById(buttonId);
-            if (isLoading) {
-                button.classList.add('loading');
-                button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${text}`;
-                button.disabled = true;
+            if (isActive) {
+                indicator.className = 'status-indicator status-active';
+                text.textContent = message || 'Data is current';
             } else {
-                button.classList.remove('loading');
-                button.disabled = false;
-                if (buttonId === 'load-events-btn') {
-                    button.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Events';
-                } else {
-                    button.innerHTML = '<i class="fas fa-spider"></i> Scan Latest Data';
-                }
+                indicator.className = 'status-indicator status-inactive';
+                text.textContent = message || 'Checking data status...';
             }
         }
 
-        // Load and display events
-        async function loadEvents() {
-            setLoadingState('load-events-btn', true, 'Loading...');
+        async function startScraping() {
+            const btn = event.target;
+            btn.classList.add('loading');
             
             try {
-                const response = await fetch(`${API_BASE}/events?limit=50`);
-                if (!response.ok) throw new Error('Failed to fetch events');
+                // For the static version, we'll trigger the daily scraper
+                // In production, this would typically be handled by a cron job
+                updateStatus(true, 'Scraping request sent - data will update soon');
+                alert('Manual scraping is now handled by the daily scraper script. Data updates once per day for optimal performance.');
+            } catch (error) {
+                console.error('Error:', error);
+                updateStatus(false, 'Manual scraping not available in static mode');
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function stopScraping() {
+            const btn = event.target;
+            btn.classList.add('loading');
+            
+            try {
+                updateStatus(false, 'Scraping is managed by daily schedule');
+                alert('Scraping is now managed by a daily schedule for optimal performance.');
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function refreshEvents() {
+            const btn = event.target;
+            btn.classList.add('loading');
+            
+            try {
+                await loadEvents();
+                updateStatus(true, 'Events refreshed successfully');
+            } catch (error) {
+                console.error('Error refreshing events:', error);
+                updateStatus(false, 'Failed to refresh events');
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function loadEvents() {
+            try {
+                console.log('🔄 Loading events from static API...');
+                const response = await fetch(`${API_BASE}/events`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
                 
                 const data = await response.json();
-                const events = data.events || data; // Handle both response formats
+                console.log('📊 Loaded data:', {
+                    count: data.count,
+                    total_available: data.total_available,
+                    last_updated: data.last_updated,
+                    source: data.source
+                });
+                
+                // Update last data timestamp
+                lastDataUpdate = data.last_updated;
+                
+                // Extract events from the response
+                const events = data.events || [];
+                
+                // Display events
                 displayEvents(events);
-                showNotification(`Loaded ${events.length} events successfully! 🚀`);
-            } catch (error) {
-                console.error('Error loading events:', error);
-                showNotification('Failed to load events. Please try again.', 'error');
-                document.getElementById('events-container').innerHTML = `
-                    <div style="text-align: center; padding: 60px; color: rgba(255,255,255,0.8); grid-column: 1 / -1;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 20px;"></i>
-                        <h3>Connection Error</h3>
-                        <p>Unable to load events. Please check your connection.</p>
-                    </div>
-                `;
-            } finally {
-                setLoadingState('load-events-btn', false);
-            }
-        }
-
-        // Run manual scraping
-        async function runScraping() {
-            setLoadingState('run-scraping-btn', true, 'Scanning...');
-            
-            try {
-                const response = await fetch(`${API_BASE}/scrape`, { method: 'POST' });
-                if (!response.ok) throw new Error('Scraping failed');
                 
-                showNotification('AI scan completed! Loading fresh data...', 'success');
-                
-                setTimeout(() => {
-                    loadEvents();
-                    loadStatus();
-                }, 2000);
-            } catch (error) {
-                console.error('Error running scraping:', error);
-                showNotification('Scan failed. Please try again.', 'error');
-            } finally {
-                setLoadingState('run-scraping-btn', false);
-            }
-        }
-
-        // Load system status
-        async function loadStatus() {
-            try {
-                const response = await fetch(`${API_BASE}/status`);
-                if (response.ok) {
-                    const status = await response.json();
-                    updateStatusDisplay(status);
+                // Update status with data info
+                if (data.last_updated) {
+                    const updateTime = new Date(data.last_updated).toLocaleString();
+                    updateStatus(true, `Data updated: ${updateTime}`);
+                } else {
+                    updateStatus(true, `${events.length} events loaded`);
                 }
+                
             } catch (error) {
-                console.error('Error loading status:', error);
+                console.error('❌ Error loading events:', error);
+                displayError(`Failed to load events: ${error.message}`);
+                updateStatus(false, 'Failed to load events');
             }
         }
 
-        // Update status display
-        function updateStatusDisplay(status) {
-            const statusElement = document.getElementById('auto-scraper-status');
-            if (statusElement) {
-                const autoScraper = status.auto_scraper;
-                const lastRun = autoScraper.last_run ? 
-                    new Date(autoScraper.last_run).toLocaleString() : 'Never';
+        async function loadDataStats() {
+            try {
+                const response = await fetch(`${API_BASE}/events/stats`);
+                const stats = await response.json();
                 
-                const indicatorClass = autoScraper.running ? 'status-active' : 'status-inactive';
-                const statusText = autoScraper.running ? 'ACTIVE' : 'INACTIVE';
+                if (stats.error) {
+                    console.warn('Stats warning:', stats.error);
+                    return;
+                }
                 
-                statusElement.innerHTML = `
-                    <span class="status-indicator ${indicatorClass}"></span>
-                    <strong>AI System:</strong> ${statusText} 
-                    <span style="margin: 0 15px;">|</span>
-                    <strong>Auto-Scan:</strong> Every ${autoScraper.interval_minutes} min 
-                    <span style="margin: 0 15px;">|</span>
-                    <strong>Last Scan:</strong> ${lastRun} 
-                    <span style="margin: 0 15px;">|</span>
-                    <strong>Events:</strong> ${status.database.total_events}
-                `;
+                console.log('📈 Data statistics:', stats);
+                
+                // Update status with more detailed info
+                const updateTime = stats.last_updated ? 
+                    new Date(stats.last_updated).toLocaleString() : 'Unknown';
+                
+                updateStatus(true, `${stats.total_events} events (Updated: ${updateTime})`);
+                
+            } catch (error) {
+                console.warn('Could not load stats:', error);
             }
         }
 
-        // Display events in the grid
         function displayEvents(events) {
-            const container = document.getElementById('events-container');
+            const grid = document.getElementById('eventsGrid');
             
             if (!events || events.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 60px; color: rgba(255,255,255,0.8); grid-column: 1 / -1;">
-                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px;"></i>
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-times"></i>
                         <h3>No Events Found</h3>
-                        <p>Try running a scan to discover new startup opportunities!</p>
+                        <p>Start the auto-scraper to discover startup events</p>
                     </div>
                 `;
                 return;
             }
 
-            const eventsHtml = events.map((event, index) => {
-                const eventDate = event.date ? new Date(event.date).toLocaleDateString() : 'Date TBA';
-                const eventLocation = event.location || 'Location TBA';
-                const eventUrl = event.url || '#';
-                const eventType = event.type || 'startup_program';
-                
-                // Get source-specific styling and icon
-                const getSourceInfo = (source) => {
-                    const sourceLower = (source || '').toLowerCase().replace(/\s+/g, '-');
-                    
-                    if (sourceLower.includes('startup-events')) {
-                        return { class: 'source-startup-events', icon: 'fas fa-rocket', displayName: 'Startup Events' };
-                    } else if (sourceLower.includes('t-hub')) {
-                        return { class: 'source-t-hub', icon: 'fas fa-building', displayName: 'T-Hub Hyderabad' };
-                    } else if (sourceLower.includes('nasscom')) {
-                        return { class: 'source-nasscom', icon: 'fas fa-industry', displayName: 'NASSCOM India' };
-                    } else if (sourceLower.includes('startup-india')) {
-                        return { class: 'source-startup-india', icon: 'fas fa-flag', displayName: 'Startup India Gov' };
-                    } else {
-                        return { class: 'source-default', icon: 'fas fa-globe', displayName: source || 'Unknown Source' };
-                    }
-                };
-                
-                const sourceInfo = getSourceInfo(event.source);
+            grid.innerHTML = events.map((event, index) => {
+                const sourceClass = getSourceClass(event.source);
+                const typeClass = getTypeClass(event.event_type);
                 
                 return `
-                    <div class="event-card" style="animation-delay: ${index * 0.1}s;">
+                    <div class="event-card" style="animation-delay: ${index * 0.1}s">
                         <div class="event-image">
                             ${event.image_url ? 
                                 `<img src="${event.image_url}" alt="${event.title}" 
-                                      class="loading" 
-                                      onload="this.classList.remove('loading'); this.classList.add('loaded');" 
-                                      onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'image-placeholder\\'>📅 ${event.organizer || 'Event'}</div>';">` : 
-                                `<div class="image-placeholder">📅 ${event.organizer || 'Event'}</div>`
+                                     onerror="this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><i class=\\'fas fa-image\\'></i></div>'"
+                                     onload="this.classList.add('loaded')" class="loading">` :
+                                `<div class="image-placeholder"><i class="fas fa-image"></i></div>`
                             }
                         </div>
                         
-                        <div class="event-header">
-                            <h3 class="event-title">${event.title || 'Untitled Event'}</h3>
-                            <span class="event-type type-${eventType}">
-                                <i class="fas fa-tag"></i>
-                                ${eventType.replace('_', ' ')}
-                            </span>
-                        </div>
-                        
-                        <p class="event-description">${event.description || 'No description available.'}</p>
-                        
-                        <div class="event-meta">
-                            <div class="meta-item">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>${eventDate}</span>
+                        <div class="event-content">
+                            <div class="event-header">
+                                <h3 class="event-title">${event.title}</h3>
+                                ${event.event_type ? `<span class="event-type ${typeClass}">
+                                    <i class="fas fa-tag"></i>
+                                    ${event.event_type.replace(/_/g, ' ')}
+                                </span>` : ''}
                             </div>
-                            <div class="meta-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${eventLocation}</span>
+                            
+                            <p class="event-description">${event.description || 'No description available'}</p>
+                            
+                            <div class="event-meta">
+                                ${event.date ? `<div class="meta-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>${new Date(event.date).toLocaleDateString()}</span>
+                                </div>` : ''}
+                                
+                                ${event.location ? `<div class="meta-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${event.location}</span>
+                                </div>` : ''}
                             </div>
-                        </div>
-                        
-                        <div class="event-actions">
-                            <span class="event-source ${sourceInfo.class}">
-                                <i class="${sourceInfo.icon}"></i>
-                                ${sourceInfo.displayName}
-                            </span>
-                            ${eventUrl !== '#' ? `
-                                <a href="${eventUrl}" target="_blank" class="event-link">
+                            
+                            <div class="event-actions">
+                                <span class="event-source ${sourceClass}">
                                     <i class="fas fa-external-link-alt"></i>
-                                    Learn More
-                                </a>
-                            ` : '<span class="event-link" style="opacity: 0.5;">No Link Available</span>'}
+                                    ${event.source || 'Unknown'}
+                                </span>
+                                
+                                ${event.url && event.url !== 'No Link Available' ? 
+                                    `<a href="${event.url}" target="_blank" class="learn-more-btn">
+                                        Learn More
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>` : 
+                                    `<span class="learn-more-btn" style="opacity: 0.5; cursor: not-allowed;">
+                                        No Link Available
+                                    </span>`
+                                }
+                            </div>
                         </div>
                     </div>
                 `;
             }).join('');
-            
-            container.innerHTML = eventsHtml;
         }
 
-        // Auto-refresh functionality
-        let autoRefreshTimer;
-        
-        function startAutoRefresh() {
-            autoRefreshTimer = setInterval(() => {
-                console.log('Auto-refreshing events...');
-                loadEvents();
-            }, 300000); // 5 minutes
+        function getSourceClass(source) {
+            if (!source) return 'source-default';
+            
+            const sourceMap = {
+                'Startup Events': 'source-startup-events',
+                'T-Hub': 'source-t-hub',
+                'NASSCOM': 'source-nasscom',
+                'Startup India': 'source-startup-india'
+            };
+            
+            return sourceMap[source] || 'source-default';
         }
-        
-        function stopAutoRefresh() {
-            if (autoRefreshTimer) {
-                clearInterval(autoRefreshTimer);
+
+        function getTypeClass(type) {
+            if (!type) return '';
+            
+            const typeMap = {
+                'funding': 'type-funding',
+                'government_scheme': 'type-government_scheme',
+                'startup_program': 'type-startup_program',
+                'incubator': 'type-incubator',
+                'startup_event': 'type-startup_event'
+            };
+            
+            return typeMap[type] || '';
+        }
+
+        function displayError(message) {
+            const grid = document.getElementById('eventsGrid');
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const health = await response.json();
+                
+                if (health.status === 'healthy') {
+                    const updateTime = health.last_data_update ? 
+                        new Date(health.last_data_update).toLocaleString() : 'Never';
+                    updateStatus(true, `${health.events_available} events available (Last update: ${updateTime})`);
+                } else {
+                    updateStatus(false, 'Service is degraded');
+                }
+            } catch (error) {
+                console.error('Error checking health:', error);
+                updateStatus(false, 'Unable to connect to server');
             }
         }
-        
-        // Initialize on page load
+
+        // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            loadEvents();
-            loadStatus();
-            startAutoRefresh();
+            console.log('🚀 AI Event Bot - Static Version 2.0');
+            console.log('⚡ Ultra-fast loading from pre-processed data');
             
-            // Load status every minute
-            setInterval(loadStatus, 60000);
+            // Load events immediately (this is now super fast!)
+            loadEvents();
+            
+            // Load additional stats
+            loadDataStats();
+            
+            // Check health status
+            checkHealth();
+            
+            // Update stats every 5 minutes (much less frequent since data is static)
+            setInterval(() => {
+                loadDataStats();
+                checkHealth();
+            }, 300000); // 5 minutes
         });
-        
-        // Clean up on page unload
-        window.addEventListener('beforeunload', stopAutoRefresh);
     </script>
 </body>
 </html>
