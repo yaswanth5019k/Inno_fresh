@@ -1,0 +1,91 @@
+/Users/yaswanth/Developer/innobotFresh/backend/app.py:72: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+/Users/yaswanth/Developer/innobotFresh/backend/app.py:77: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+INFO:     Started server process [11419]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[2025-10-13 23:37:03.720279] Running automatic scraping...
+Running scraper for Startup Events...
+[2025-10-13 23:37:03.720361] Auto-scraper started (runs every 30.0 minutes)
+Found 6 events from Startup Events
+Running scraper for Startup India...
+Found 0 events from Startup India
+INFO:     127.0.0.1:54168 - "GET /events?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54169 - "GET /status HTTP/1.1" 200 OK
+Running scraper for T-Hub...
+Found 1 events from T-Hub
+Running scraper for NASSCOM...
+Found 4 events from NASSCOM
+[2025-10-13 23:37:03.720279] Auto-scraper found 11 new events
+INFO:     127.0.0.1:54176 - "GET /events?limit=15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54177 - "GET /events?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54177 - "GET /events?limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54193 - "GET /events?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54194 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54194 - "POST /scrape HTTP/1.1" 200 OK
+Starting scraping process...
+Running scraper for Startup Events...
+Found 6 events from Startup Events
+Running scraper for Startup India...
+Found 0 events from Startup India
+Running scraper for T-Hub...
+Found 1 events from T-Hub
+Running scraper for NASSCOM...
+Found 4 events from NASSCOM
+Added 6 events from Startup Events
+Added 0 events from Startup India
+Added 1 events from T-Hub
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Added 0 events from NASSCOM
+Scraping completed. Total events added: 7
+INFO:     127.0.0.1:54194 - "GET /events?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54193 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54199 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54202 - "POST /scrape HTTP/1.1" 200 OK
+Starting scraping process...
+Running scraper for Startup Events...
+Found 6 events from Startup Events
+Running scraper for Startup India...
+Found 0 events from Startup India
+Running scraper for T-Hub...
+Found 1 events from T-Hub
+Running scraper for NASSCOM...
+Found 4 events from NASSCOM
+Added 6 events from Startup Events
+Added 0 events from Startup India
+Added 1 events from T-Hub
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Error inserting event from NASSCOM: 'organizer'
+Added 0 events from NASSCOM
+Scraping completed. Total events added: 7
+INFO:     127.0.0.1:54202 - "GET /events?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54205 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54216 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54234 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54236 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54242 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54244 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54275 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54280 - "GET /events?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54281 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54282 - "GET /events?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54282 - "GET /events?limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54292 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54294 - "GET /status HTTP/1.1" 200 OK

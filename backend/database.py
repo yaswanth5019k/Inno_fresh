@@ -25,11 +25,18 @@ class DatabaseManager:
                 source_url TEXT NOT NULL,
                 event_type TEXT NOT NULL,
                 tags TEXT, -- JSON string of tags
+                image_url TEXT, -- URL of event image
                 created_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(title, organizer, source_url)
             )
         """)
+        
+        # Add image_url column if it doesn't exist (for existing databases)
+        try:
+            cursor.execute("ALTER TABLE events ADD COLUMN image_url TEXT")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
         
         # Scraping logs table
         cursor.execute("""
@@ -55,8 +62,8 @@ class DatabaseManager:
         
         cursor.execute("""
             INSERT OR REPLACE INTO events 
-            (title, description, date, location, organizer, source_url, event_type, tags, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (title, description, date, location, organizer, source_url, event_type, tags, image_url, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             event_data['title'],
             event_data.get('description'),
@@ -66,6 +73,7 @@ class DatabaseManager:
             event_data['source_url'],
             event_data['event_type'],
             tags_json,
+            event_data.get('image_url'),
             datetime.now().isoformat()
         ))
         
@@ -76,7 +84,7 @@ class DatabaseManager:
     
     def add_event(self, title: str, description: str = None, date: str = None, 
                   location: str = None, url: str = None, source: str = None, 
-                  event_type: str = "startup_program") -> int:
+                  event_type: str = "startup_program", image_url: str = None) -> int:
         """Add event with individual parameters (for scraper compatibility)"""
         event_data = {
             'title': title,
@@ -86,7 +94,8 @@ class DatabaseManager:
             'organizer': source or 'Unknown',
             'source_url': url or '',
             'event_type': event_type,
-            'tags': []
+            'tags': [],
+            'image_url': image_url
         }
         return self.insert_event(event_data)
     

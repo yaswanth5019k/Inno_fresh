@@ -9,88 +9,7 @@
     <style>
         * {
             margin: 0;
-            .source-default {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white !important;
-            border: 2px solid #5e72e4;
-        }
-
-        /* Source Legend Styles */
-        .source-legend-section {
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-
-        .source-legend-section h3 {
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .source-legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .legend-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: flex-start;
-        }
-
-        .legend-badge {
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border: 2px solid;
-        }
-
-        .legend-description {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        .legend-link {
-            color: #4fc3f7;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .legend-link:hover {
-            color: #29b6f6;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .source-legend {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                padding: 20px;
-            }
-        }
-
-        .event-actions { padding: 0;
+            padding: 0;
             box-sizing: border-box;
         }
         
@@ -189,7 +108,6 @@
             font-size: 48px;
             background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d79ff);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -204,7 +122,6 @@
             font-weight: 800;
             background: linear-gradient(45deg, #fff, #f0f0f0);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
             margin-bottom: 15px;
@@ -377,67 +294,6 @@
             border-radius: 25px 25px 0 0;
         }
 
-        .event-image {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            border-radius: 20px 20px 0 0;
-            margin: -30px -30px 20px -30px;
-            position: relative;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-        }
-
-        .event-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 20px 20px 0 0;
-        }
-
-        .event-card:hover .event-image img {
-            transform: scale(1.03);
-            filter: brightness(1.05);
-        }
-        
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .image-placeholder::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: rotate(45deg) translateX(-100%); }
-            100% { transform: rotate(45deg) translateX(100%); }
-        }
-        
-        .event-image img.loading {
-            opacity: 0;
-        }
-        
-        .event-image img.loaded {
-            opacity: 1;
-        }
-
         .event-header {
             display: flex;
             justify-content: space-between;
@@ -530,47 +386,11 @@
         .event-source {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             color: #495057;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            border: 2px solid #dee2e6;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Source-specific styling */
-        .source-startup-events {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white !important;
-            border: 2px solid #ff5252;
-        }
-
-        .source-t-hub {
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
-            color: white !important;
-            border: 2px solid #26a69a;
-        }
-
-        .source-nasscom {
-            background: linear-gradient(135deg, #45b7d1, #96c93d);
-            color: white !important;
-            border: 2px solid #039be5;
-        }
-
-        .source-startup-india {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: white !important;
-            border: 2px solid #e91e63;
-        }
-
-        .source-default {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white !important;
-            border: 2px solid #5e72e4;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
         }
 
         .event-link {
@@ -598,7 +418,6 @@
             justify-content: center;
             align-items: center;
             padding: 60px;
-            grid-column: 1 / -1;
         }
 
         .loading-spinner {
@@ -770,45 +589,6 @@
             </div>
         </div>
 
-        <!-- Source Legend -->
-        <div class="source-legend-section">
-            <h3>📊 Data Sources</h3>
-            <div class="source-legend">
-                <div class="legend-item">
-                    <span class="legend-badge source-startup-events">
-                        <i class="fas fa-rocket"></i>
-                        Startup Events
-                    </span>
-                    <span class="legend-description">Global startup events & conferences</span>
-                    <a href="https://startupevents.org" target="_blank" class="legend-link">startupevents.org</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-nasscom">
-                        <i class="fas fa-industry"></i>
-                        NASSCOM India
-                    </span>
-                    <span class="legend-description">India's IT industry association events</span>
-                    <a href="https://nasscom.in" target="_blank" class="legend-link">nasscom.in</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-t-hub">
-                        <i class="fas fa-building"></i>
-                        T-Hub Hyderabad
-                    </span>
-                    <span class="legend-description">India's premier startup incubator</span>
-                    <a href="https://t-hub.co" target="_blank" class="legend-link">t-hub.co</a>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-badge source-startup-india">
-                        <i class="fas fa-flag"></i>
-                        Startup India Gov
-                    </span>
-                    <span class="legend-description">Government startup schemes</span>
-                    <a href="https://www.startupindia.gov.in" target="_blank" class="legend-link">startupindia.gov.in</a>
-                </div>
-            </div>
-        </div>
-
         <!-- Events Section -->
         <div class="events-section">
             <div id="events-container" class="events-grid">
@@ -885,15 +665,14 @@
                 const response = await fetch(`${API_BASE}/events?limit=50`);
                 if (!response.ok) throw new Error('Failed to fetch events');
                 
-                const data = await response.json();
-                const events = data.events || data; // Handle both response formats
+                const events = await response.json();
                 displayEvents(events);
                 showNotification(`Loaded ${events.length} events successfully! 🚀`);
             } catch (error) {
                 console.error('Error loading events:', error);
                 showNotification('Failed to load events. Please try again.', 'error');
                 document.getElementById('events-container').innerHTML = `
-                    <div style="text-align: center; padding: 60px; color: rgba(255,255,255,0.8); grid-column: 1 / -1;">
+                    <div style="text-align: center; padding: 60px; color: rgba(255,255,255,0.8);">
                         <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 20px;"></i>
                         <h3>Connection Error</h3>
                         <p>Unable to load events. Please check your connection.</p>
@@ -984,37 +763,8 @@
                 const eventUrl = event.url || '#';
                 const eventType = event.type || 'startup_program';
                 
-                // Get source-specific styling and icon
-                const getSourceInfo = (source) => {
-                    const sourceLower = (source || '').toLowerCase().replace(/\s+/g, '-');
-                    
-                    if (sourceLower.includes('startup-events')) {
-                        return { class: 'source-startup-events', icon: 'fas fa-rocket', displayName: 'Startup Events' };
-                    } else if (sourceLower.includes('t-hub')) {
-                        return { class: 'source-t-hub', icon: 'fas fa-building', displayName: 'T-Hub Hyderabad' };
-                    } else if (sourceLower.includes('nasscom')) {
-                        return { class: 'source-nasscom', icon: 'fas fa-industry', displayName: 'NASSCOM India' };
-                    } else if (sourceLower.includes('startup-india')) {
-                        return { class: 'source-startup-india', icon: 'fas fa-flag', displayName: 'Startup India Gov' };
-                    } else {
-                        return { class: 'source-default', icon: 'fas fa-globe', displayName: source || 'Unknown Source' };
-                    }
-                };
-                
-                const sourceInfo = getSourceInfo(event.source);
-                
                 return `
                     <div class="event-card" style="animation-delay: ${index * 0.1}s;">
-                        <div class="event-image">
-                            ${event.image_url ? 
-                                `<img src="${event.image_url}" alt="${event.title}" 
-                                      class="loading" 
-                                      onload="this.classList.remove('loading'); this.classList.add('loaded');" 
-                                      onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'image-placeholder\\'>📅 ${event.organizer || 'Event'}</div>';">` : 
-                                `<div class="image-placeholder">📅 ${event.organizer || 'Event'}</div>`
-                            }
-                        </div>
-                        
                         <div class="event-header">
                             <h3 class="event-title">${event.title || 'Untitled Event'}</h3>
                             <span class="event-type type-${eventType}">
@@ -1037,9 +787,9 @@
                         </div>
                         
                         <div class="event-actions">
-                            <span class="event-source ${sourceInfo.class}">
-                                <i class="${sourceInfo.icon}"></i>
-                                ${sourceInfo.displayName}
+                            <span class="event-source">
+                                <i class="fas fa-globe"></i>
+                                ${event.source || 'Unknown Source'}
                             </span>
                             ${eventUrl !== '#' ? `
                                 <a href="${eventUrl}" target="_blank" class="event-link">
@@ -1083,6 +833,19 @@
         
         // Clean up on page unload
         window.addEventListener('beforeunload', stopAutoRefresh);
+
+        // Add some interactive hover effects for cards
+        document.addEventListener('mouseover', function(e) {
+            if (e.target.closest('.event-card')) {
+                e.target.closest('.event-card').style.transform = 'translateY(-10px) rotate(1deg)';
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.closest('.event-card')) {
+                e.target.closest('.event-card').style.transform = 'translateY(0) rotate(0deg)';
+            }
+        });
     </script>
 </body>
 </html>
