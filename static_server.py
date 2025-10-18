@@ -161,25 +161,32 @@ async def health_check():
 # Mount static files for frontend
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-# Serve the enhanced frontend at root
+# Serve the modern frontend at root
 @app.get("/")
-async def serve_enhanced_frontend():
-    """Serve the enhanced frontend interface"""
+async def serve_modern_frontend():
+    """Serve the modern redesigned frontend interface"""
     try:
-        with open("frontend/index_enhanced.html", "r") as f:
+        with open("frontend/index_modern.html", "r") as f:
             html_content = f.read()
         return HTMLResponse(content=html_content)
     except FileNotFoundError:
-        # Fallback to original index
-        with open("frontend/index.html", "r") as f:
-            html_content = f.read()
-        return HTMLResponse(content=html_content)
+        # Fallback to enhanced version
+        try:
+            with open("frontend/index_enhanced.html", "r") as f:
+                html_content = f.read()
+            return HTMLResponse(content=html_content)
+        except FileNotFoundError:
+            # Final fallback to original
+            with open("frontend/index.html", "r") as f:
+                html_content = f.read()
+            return HTMLResponse(content=html_content)
 
 if __name__ == "__main__":
     import uvicorn
     from fastapi.responses import HTMLResponse
-    print("🚀 Starting Enhanced AI Event Bot Server...")
-    print("📱 Enhanced Frontend available at: http://localhost:8000/")
-    print("📱 Original Frontend available at: http://localhost:8000/static/")
+    print("🚀 Starting Modern AI Event Bot Server...")
+    print("📱 Modern UI available at: http://localhost:8000/")
+    print("📱 Enhanced UI available at: http://localhost:8000/static/index_enhanced.html")
+    print("📱 Original UI available at: http://localhost:8000/static/")
     print("🔌 API available at: http://localhost:8000/events")
     uvicorn.run(app, host="0.0.0.0", port=8000)
