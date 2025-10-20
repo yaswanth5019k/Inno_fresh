@@ -109,11 +109,12 @@ async def get_status():
 @app.get("/events")
 async def get_events(
     limit: int = 50,
-    event_type: Optional[str] = None
+    event_type: Optional[str] = None,
+    remove_duplicates: bool = True
 ):
-    """Get events from the database"""
+    """Get events from the database with optional deduplication"""
     try:
-        events = db.get_events(limit=limit, event_type=event_type)
+        events = db.get_events(limit=limit*2, event_type=event_type)  # Get more events initially for deduplication
         
         # Map database fields to frontend-expected fields
         formatted_events = []
@@ -127,9 +128,25 @@ async def get_events(
             formatted_event['type'] = event.get('event_type', 'startup_program')
             formatted_events.append(formatted_event)
         
+        # Remove duplicates if requested
+        if remove_duplicates:
+            unique_events = []
+            seen_titles = set()
+            
+            for event in formatted_events:
+                title = event.get('title', '').strip().lower()
+                if title and title not in seen_titles:
+                    seen_titles.add(title)
+                    unique_events.append(event)
+                elif not title:  # Keep events without titles
+                    unique_events.append(event)
+            
+            formatted_events = unique_events[:limit]  # Apply limit after deduplication
+        
         return {
             "events": formatted_events,
             "count": len(formatted_events),
+            "duplicates_removed": remove_duplicates,
             "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
